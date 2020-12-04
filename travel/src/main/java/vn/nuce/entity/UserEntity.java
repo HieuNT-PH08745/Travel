@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Table(name = "user")
 public class UserEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_Id;
     @Column(name = "user_Name")
     private String user_Name;
@@ -30,6 +30,8 @@ public class UserEntity implements Serializable {
     private Timestamp user_Lastupdate;
     @Column(name = "user_Status")
     private Long user_Status;
+    @Column(name = "user_Image")
+    private byte[] image;
 
     public Long getUser_Id() {
         return user_Id;
@@ -117,5 +119,13 @@ public class UserEntity implements Serializable {
 
     public void setUser_Status(Long user_Status) {
         this.user_Status = user_Status;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

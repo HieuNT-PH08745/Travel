@@ -8,14 +8,18 @@ public class BookTourMapper {
     public static BookTourDto toBookTourDto(BookTourEntity bookTourEntity) {
         BookTourDto bookTourDto = new BookTourDto();
 
-        bookTourDto.setId(bookTourEntity.getId());
-        bookTourDto.setTourId(bookTourEntity.getTourId());
-        bookTourDto.setNote(bookTourEntity.getNote());
-        bookTourDto.setPhone(bookTourEntity.getPhone());
-        bookTourDto.setAddress(bookTourEntity.getAddress());
-        bookTourDto.setEmail(bookTourEntity.getEmail());
-        bookTourDto.setName(bookTourEntity.getName());
+        bookTourDto.setRegistration_Id(bookTourEntity.getRegistration_Id());
         bookTourDto.setUserId(bookTourEntity.getUserId());
+        bookTourDto.setTourId(bookTourEntity.getTourId());
+        bookTourDto.setName(bookTourEntity.getName());
+        bookTourDto.setPhone(bookTourEntity.getPhone());
+        bookTourDto.setEmail(bookTourEntity.getEmail());
+        bookTourDto.setPrice(bookTourEntity.getPrice());
+        bookTourDto.setNote(bookTourEntity.getNote());
+        bookTourDto.setNumChild(bookTourEntity.getNumChild());
+        bookTourDto.setNumAdult(bookTourEntity.getNumAdult());
+        bookTourDto.setStatus(bookTourEntity.getStatus());
+        bookTourDto.setCreateDate(bookTourEntity.getCreateDate());
 
         return bookTourDto;
     }
@@ -23,14 +27,18 @@ public class BookTourMapper {
     public static BookTourEntity toBookTourEntity(BookTourDto bookTourDto) {
         BookTourEntity bookTourEntity = new BookTourEntity();
 
-        bookTourEntity.setId(bookTourDto.getId());
-        bookTourEntity.setName(bookTourDto.getName());
-        bookTourEntity.setEmail(bookTourDto.getEmail());
-        bookTourEntity.setAddress(bookTourDto.getAddress());
-        bookTourEntity.setPhone(bookTourDto.getPhone());
-        bookTourEntity.setNote(bookTourDto.getNote());
-        bookTourEntity.setTourId(bookTourDto.getTourId());
+        bookTourEntity.setRegistration_Id(bookTourDto.getRegistration_Id());
         bookTourEntity.setUserId(bookTourDto.getUserId());
+        bookTourEntity.setTourId(bookTourDto.getTourId());
+        bookTourEntity.setName(bookTourDto.getName());
+        bookTourEntity.setPhone(bookTourDto.getPhone());
+        bookTourEntity.setEmail(bookTourDto.getEmail());
+        bookTourEntity.setPrice(bookTourDto.getPrice());
+        bookTourEntity.setNote(bookTourDto.getNote());
+        bookTourEntity.setNumChild(bookTourDto.getNumChild());
+        bookTourEntity.setNumAdult(bookTourDto.getNumAdult());
+        bookTourEntity.setStatus(bookTourDto.getStatus());
+        bookTourEntity.setCreateDate(bookTourDto.getCreateDate());
 
         return bookTourEntity;
     }

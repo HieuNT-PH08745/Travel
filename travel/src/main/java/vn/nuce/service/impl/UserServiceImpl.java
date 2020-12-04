@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.nuce.dto.UserDto;
 import vn.nuce.entity.UserEntity;
+import vn.nuce.mapper.UserMapper;
 import vn.nuce.repository.impl.UserRepositoryImpl;
 import vn.nuce.service.UserService;
 
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDto userDto) {
-        repository.save(getInstanceMapper().map(userDto, UserEntity.class));
+        repository.save(UserMapper.toUserEntity(userDto));
     }
 
     @Override
@@ -61,12 +62,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findOneUser(Long id) {
-        return getInstanceMapper().map(repository.findOne(id),UserDto.class);
+        return UserMapper.toUserDto(repository.findOne(id));
     }
 
     @Override
     public UserDto updateUser(UserDto dto) {
-        UserEntity entity = repository.update(getInstanceMapper().map(dto,UserEntity.class));
-        return getInstanceMapper().map(entity, UserDto.class);
+        UserEntity entity = repository.update(UserMapper.toUserEntity(dto));
+        return UserMapper.toUserDto(entity);
     }
 }

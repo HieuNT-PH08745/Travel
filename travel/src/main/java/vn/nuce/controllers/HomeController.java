@@ -42,48 +42,13 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/book/{id}")
-    public String bookTourById(@PathVariable Long id,HttpSession httpSession, ModelMap modelMap) {
-        setUser(httpSession, modelMap);
-        List<TourDto> tourDtos = tourService.findAllTours();
-//      pmodelMap.addAttribute("tours", tourDtos);
-        TourDto tourDto = tourService.findOneTour(id);
-
-        modelMap.addAttribute("tour", tourDto);
-        return "book";
-    }
-
-    @PostMapping("/book/{id}")
-    public String bookTour(@PathVariable Long id, @RequestParam(name = "name1") String name,
-                           @RequestParam(name = "email1") String email,
-                           @RequestParam(name = "address1") String address,
-                           @RequestParam(name = "phone1") String phone,
-                           @RequestParam(name = "note1") String note) {
-        BookTourDto dto = new BookTourDto();
-        dto.setId(id);
-        dto.setName(name);
-        dto.setEmail(email);
-        dto.setAddress(address);
-        dto.setPhone(phone);
-        dto.setNote(note);
-        dto.setTourId(id);
-
-        try {
-            bookTourService.save(dto);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "/success";
-    }
-
     private void setUser(HttpSession session, ModelMap modelMap) {
         if (session.getAttribute("user") != null) {
             UserDto dto = (UserDto) session.getAttribute("user");
             modelMap.addAttribute("dto", dto);
         }
     }
+
     @GetMapping("/tourDetail")
     public String image(ModelMap modelMap) {
         modelMap.addAttribute("location", modelMap);

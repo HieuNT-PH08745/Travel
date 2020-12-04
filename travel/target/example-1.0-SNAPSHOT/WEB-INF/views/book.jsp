@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
 <c:url value="/login" var="loginUrl"/>
@@ -23,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/home/styles/responsive.css"/>">
 
     <link rel="stylesheet" type="text/css"
-          href="<c:url value="/resources/home/css/book.css"/>">
+          href="<c:url value="/resources/home/css/books.css"/>">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -35,47 +36,57 @@
         });
     </script>
     <script>
-        function themKhachHang() {
-            var table = document.getElementById("myTable");
-            var row1 = table.rows[1].cloneNode(true);
-            document.getElementById("myTable").appendChild(row1);
+        function format_curency(a) {
+            a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
         }
 
-        function xoa(button) {
-            var row = button.parentElement.parentElement;
-            document.getElementById("myTable").removeChild(row);
+        function requiredNumber1() {
+            var va = document.getElementById("nguoilon").value;
+            if (va < 0) {
+                document.getElementById("nguoilon").value = 0;
+                document.getElementById("nguoilon-value").value = 0;
+            }
+        }
+
+        function requiredNumber2() {
+            var va = document.getElementById("treem").value;
+            if (va < 0) {
+                document.getElementById("treem").value = 0;
+                document.getElementById("treem-value").value = 0;
+            }
         }
 
         function addNguoiLon() {
             var count = document.getElementById("nguoilon").value;
             var values = document.getElementById("nguoilon-value");
-            values.innerHTML = count * 1200;
+            var price = document.getElementById("tour_price").value;
+            values.value = count * price;
             tinhtong();
         }
 
         function addTreEm() {
             var count = document.getElementById("treem").value;
             var values = document.getElementById("treem-value");
-            values.innerHTML = count * 1000;
+            var price = document.getElementById("tour_price").value;
+            values.value = count * ((price * 50) / 100);
             tinhtong();
-        }
-
-        function addEmBe() {
-            var count = document.getElementById("embe").value;
-            var values = document.getElementById("embe-value");
-            values.innerHTML = count * 100;
-            tinhtong();
-
         }
 
         function tinhtong() {
+            requiredNumber1();
+            requiredNumber2();
             var sum = document.getElementById("tongtien");
-            var nguoiLon = document.getElementById("nguoilon-value").innerHTML;
-            var treEm = document.getElementById("treem-value").innerHTML;
-            var emBe = document.getElementById("embe-value").innerHTML;
-            sum.innerHTML = Number(nguoiLon) + Number(treEm) + Number(emBe);
+            var nguoiLon = document.getElementById("nguoilon-value").value;
+            var treEm = document.getElementById("treem-value").value;
+            sum.value = Number(nguoiLon) + Number(treEm);
         }
     </script>
+    <style>
+        .error {
+            color: red;
+            font-size: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -119,7 +130,7 @@
                             <c:otherwise>
                                 <div class="user_box ml-auto">
                                     <div class="user_box_login user_box_link"><a
-                                            href="/admin/home">Welcome, ${dto.username}</a></div>
+                                            href="/admin/home">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>
@@ -595,39 +606,30 @@
     </div>
 
     <!-- Main -->
-    <form method="POST">
+    <form:form method="POST" modelAttribute="bookTourDto">
         <div class="container">
+            <h3 style="text-align: center; color: #8d4fff"; font-weight: bolder;>${tour.tour_Name}</h3>
             <div class="thongtin">
                 <h3 class="title">THÔNG TIN TOUR</h3>
-                <table>
-                    <th colspan="2">
-                        <h3>${tour.tourName}</h3>
-                    </th>
+                <table style="width: 100%">
                     <tr>
-                        <td>Mã tour:</td>
-                        <td>aaaaa</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>Thời gian:</td>
-                        <td>aaaaa</td>
+                        <td style="text-align: right">${tour.tour_Departureday} ngày</td>
                     </tr>
                     <tr>
                         <td>Giá:</td>
-                        <td>aaaaa</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày khởi hành:</td>
-                        <td>aaaaa</td>
-                    </tr>
-                    <tr>
-                        <td>Số chỗ còn nhận:</td>
-                        <td>aaaaa</td>
+                        <td style="text-align: right">${tour.tour_Price}vnđ/người</td>
                     </tr>
                 </table>
 
                 <br/>
 
                 <h3 class="title">GIÁ TOUR</h3>
+                <input type="hidden" id="tour_price" value="${tour.tour_Price}">
                 <table id="customers">
                     <tr>
                         <th></th>
@@ -635,26 +637,33 @@
                         <th>Giá</th>
                     </tr>
                     <tr>
-                        <td>Người lớn (9 đến 100 tuổi)</td>
-                        <td><input class="numberss" id="nguoilon" type="number" onchange="addNguoiLon()"></td>
-                        <td id="nguoilon-value">0</td>
+                        <td>Người lớn (9 tuổi trở lên)</td>
+                        <td><input class="numbers" id="nguoilon" type="number" name="numAdult"
+                                   onchange="addNguoiLon(), requiredNumber1()" value="0"/></td>
+                        <td>
+                            <input type="text" id="nguoilon-value"
+                                   style="border: none; width: 75%; background-color: white; text-align: right" readonly
+                                   value="0">vnđ
+                        </td>
                     </tr>
                     <tr>
                         <td>Trẻ em (6 đến 8 tuổi)</td>
-                        <td><input class="numberss" id="treem" type="number" onchange="addTreEm()"></td>
-                        <td id="treem-value">0</td>
-                    </tr>
-                    <tr>
-                        <td>Em bé (0 đến 5 tuổi)</td>
-                        <td><input class="numberss" id="embe" type="number" onchange="addEmBe()"></td>
-                        <td id="embe-value">0</td>
+                        <td><input class="numbers" id="treem" type="number" name="numChild"
+                                   onchange="addTreEm(), requiredNumber2()" value="0"/></td>
+                        <td>
+                            <input type="text" id="treem-value"
+                                   style="border: none; width: 75%; background-color: white; text-align: right" readonly
+                                   value="0">vnđ
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <p>Tổng tiền:</p>
                         </td>
                         <td>
-                            <label id="tongtien"></label>
+                            <input type="text" id="tongtien" name="price"
+                                   style="border: none; width: 75%; background-color: white; text-align: right"
+                                   readonly="true" value="0"/>vnđ
                         </td>
                     </tr>
                 </table>
@@ -669,99 +678,47 @@
                     <tr>
                         <td>
                             <label>Họ & tên: </label>
-                            <input class="forms" name="name1" type="text" placeholder="*">
+                            <form:input class="forms" path="name" type="text" placeholder="*"/><br/>
                         </td>
                         <td>
-                            <label>Email: </label>
-                            <input class="forms" name="email1" type="text" placeholder="*">
+                            <label>Số điện thoại: </label>
+                            <form:input class="forms" path="phone" type="text" placeholder="*"/><br/>
+
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label>Địa chỉ: </label>
-                            <input class="forms" name="address1" type="text" placeholder="*">
+                        <td><form:errors path="name" cssClass="error"/></td>
+                        <td><form:errors path="phone" cssClass="error"/></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Email: </label>
+                            <form:input class="forms" path="email" type="text" placeholder="*"/><br/>
+                            <form:errors path="email" cssClass="error"/>
                         </td>
-                        <td>
-                            <label>Điện thoại: </label>
-                            <input class="forms" name="phone1" type="text" placeholder="*">
-                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <label>Ghi chú:</label>
-                            <textarea class="forms" name="note1" rows="10"></textarea>
+                            <form:textarea class="forms" path="note" rows="10"/>
                         </td>
                     </tr>
                 </table>
             </div>
-
-            <!-- <div class="danhsach">
-                <h3 class="title">Danh sách khách hàng đi tour</h3>
-                <table id="myTable" style="width: 100%;">
-                    <tr>
-                        <th>Họ & tên</th>
-                        <th>Ngày sinh</th>
-                        <th>Địa chỉ</th>
-                        <th>Giới tính</th>
-                        <th>Độ tuổi</th>
-                        <th>Giá</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><input class="forms" type="text" placeholder="*"></td>
-                        <td><input class="forms" type="date" placeholder="*"></td>
-                        <td><input class="forms" type="text"></td>
-                        <td>
-                            <select class="forms">
-                                <option>Nam</option>
-                                <option>Nữ</option>
-                                <option>Khác</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="forms">
-                                <option>Người lớn</option>
-                                <option>Trẻ em</option>
-                                <option>Em bé</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input class="forms" type="text" disabled>
-                        </td>
-                        <td>
-                            <button class="buttons" onclick="xoa(this)"><i class="fas fa-trash-alt"></i></button>
-                        </td>
-                    </tr>
-                </table>
-                <table style="width: 100%;">
-                    <tr>
-                        <td>
-                            <input type="button" id="add" value="Thêm khách hàng" onclick="themKhachHang()">
-                        </td>
-                        <td style="float: right;">
-                            <label>Mã giảm giá: </label>
-                            <input class="forms" style="width: 50%;" type="text">
-                            <button id="magiamgia" data-toggle="tooltip" data-placement="top"
-                                title="Kiểm tra mã giảm giá"><i class="fas fa-sign-in-alt"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="float: left; color: #a94442; font-size: 15px;">
-                            Lưu ý: Đơn giá trên bao gồm giá Tour và các phí phụ thu khác (nếu có)
-                        </td>
-                        <td>
-                            <label style="float: right;">Tổng tiền thanh toán: <label style="color: #CC3300;">0
-                                    VND</label></label>
-                        </td>
-                    </tr>
-                </table>
-                <br /><br />
-            </div> -->
-
         </div>
-        <center><input class="submits" type="submit" value="Đặt tour"></center>
+        <center>
+            <button class="submits" type="submit">Đặt tour</button>
+        </center>
         <br/><br/>
-    </form>
+    </form:form>
     <!-- Footer -->
 
     <footer class="footer">

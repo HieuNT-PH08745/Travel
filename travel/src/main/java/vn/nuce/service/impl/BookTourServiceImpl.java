@@ -20,14 +20,6 @@ public class BookTourServiceImpl implements BookTourService {
 
     private ModelMapper mapper = null;
 
-    private ModelMapper getInstanceMapper() {
-        if (mapper == null) {
-            mapper = new ModelMapper();
-        }
-
-        return mapper;
-    }
-
     @Override
     public List<BookTourDto> findAll() {
         List<BookTourEntity> bookTourEntities = bookTourRepository.findAll();
