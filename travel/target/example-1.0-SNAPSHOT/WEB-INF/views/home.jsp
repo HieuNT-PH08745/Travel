@@ -63,7 +63,7 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="user_box ml-auto">
-                                    <div class="user_box_login user_box_link"><a href="/home/profile">Welcome, ${dto.user_Name}</a></div>
+                                    <div class="user_box_login user_box_link"><a href="/home/user_info">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>

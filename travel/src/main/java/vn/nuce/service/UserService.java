@@ -1,5 +1,6 @@
 package vn.nuce.service;
 
+import vn.nuce.dto.BookTourDto;
 import vn.nuce.dto.UserDto;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface UserService {
     Integer deleteUser(List<Long> ids);
     UserDto findOneUser(Long id);
     UserDto updateUser(UserDto dto);
+    List<BookTourDto> findBookTourByUserId(Long id);
 }

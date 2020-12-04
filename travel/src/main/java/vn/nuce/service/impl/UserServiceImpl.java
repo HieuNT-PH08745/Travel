@@ -3,10 +3,12 @@ package vn.nuce.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.nuce.dto.BookTourDto;
 import vn.nuce.dto.UserDto;
 import vn.nuce.entity.UserEntity;
 import vn.nuce.mapper.UserMapper;
 import vn.nuce.repository.impl.UserRepositoryImpl;
+import vn.nuce.service.BookTourService;
 import vn.nuce.service.UserService;
 
 import java.sql.Timestamp;
@@ -17,6 +19,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepositoryImpl repository;
+
+    @Autowired
+    BookTourService bookTourService;
 
     private ModelMapper mapper = null;
 
@@ -69,5 +74,18 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(UserDto dto) {
         UserEntity entity = repository.update(UserMapper.toUserEntity(dto));
         return UserMapper.toUserDto(entity);
+    }
+
+    @Override
+    public List<BookTourDto> findBookTourByUserId(Long id) {
+        List<BookTourDto> bookTourDtos = bookTourService.findAll();
+        List<BookTourDto> bookTourDtos1 = new ArrayList<>();
+        for (BookTourDto bookTourDto : bookTourDtos) {
+            if (bookTourDto.getUserId() == id) {
+                bookTourDtos1.add(bookTourDto);
+            }
+        }
+
+        return bookTourDtos1;
     }
 }
