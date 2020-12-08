@@ -89,6 +89,7 @@
             var treEm = document.getElementById("treem-value").value;
             sum.value = Number(nguoiLon) + Number(treEm);
         }
+
     </script>
     <style>
         .error {
@@ -139,7 +140,7 @@
                             <c:otherwise>
                                 <div class="user_box ml-auto">
                                     <div class="user_box_login user_box_link"><a
-                                            href="/admin/home">Welcome, ${dto.user_Name}</a></div>
+                                            href="/home/user_info">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>
@@ -627,11 +628,18 @@
                     </tr>
                     <tr>
                         <td>Thời gian:</td>
-                        <td style="text-align: right">${tour.tour_Departureday} ngày</td>
+                        <td style="text-align: right"><p style="color: black">${tour.tour_Departureday} ngày</p></td>
+                    </tr>
+                    <tr>
+                        <td>Địa điểm khởi hành:</td>
+                        <td style="text-align: right"><p style="color: black;">${tour.tour_Departurelocation}</p></td>
                     </tr>
                     <tr>
                         <td>Giá:</td>
-                        <td style="text-align: right">${tour.tour_Price}vnđ/người</td>
+                        <td style="text-align: right">
+                            <input type="hidden" value="${tour.tour_Price}" id="tourPrice" >
+                            <p id="tourPriceF" onload="load()" style="color: black"></p>
+                        </td>
                     </tr>
                 </table>
 
@@ -911,5 +919,11 @@
 <script src="<c:url value="/resources/home/js/custom.js"/>"></script>
 
 </body>
-
+<script>
+    window.onload = function () {
+        var val = document.getElementById("tourPrice").value;
+        var valF = val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        document.getElementById("tourPriceF").innerHTML = valF + " vnđ/người";
+    }
+</script>
 </html>

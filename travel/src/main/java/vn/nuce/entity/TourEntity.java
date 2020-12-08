@@ -3,7 +3,6 @@ package vn.nuce.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -36,6 +35,8 @@ public class TourEntity implements Serializable {
     private Timestamp tour_Createdate;
     @Column(name = "tour_Status")
     private Long tour_Status;
+    @Column(name = "tour_Vehicle")
+    private int tour_Vehicle;
 
     public Long getTour_Id() {
         return tour_Id;
@@ -123,5 +124,13 @@ public class TourEntity implements Serializable {
 
     public void setTour_Status(Long tour_Status) {
         this.tour_Status = tour_Status;
+    }
+
+    public int getTour_Vehicle() {
+        return tour_Vehicle;
+    }
+
+    public void setTour_Vehicle(int tour_Vehicle) {
+        this.tour_Vehicle = tour_Vehicle;
     }
 }

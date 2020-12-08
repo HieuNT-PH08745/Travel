@@ -89,6 +89,8 @@ public class BookTourController {
             bookTourDto.setRegistration_Id((long) (dtos.size() + 1));
             bookTourDto.setTourId(id);
             bookTourDto.setStatus(0);
+            bookTourDto.setPayStatus(0);
+            bookTourDto.setDateConfirm(null);
             LocalDate now = LocalDate.now();
             Timestamp timestamp = Timestamp.valueOf(now.atStartOfDay());
             bookTourDto.setCreateDate(timestamp);

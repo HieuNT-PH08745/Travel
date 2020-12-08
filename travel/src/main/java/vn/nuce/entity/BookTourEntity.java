@@ -52,4 +52,10 @@ public class BookTourEntity implements Serializable {
     @Column(name = "registration_Status")
     private int status;
 
+    @Column(name = "registration_PayStatus")
+    private int payStatus;
+
+    @Column(name = "registration_DateConfirm")
+    private Timestamp dateConfirm;
+
 }

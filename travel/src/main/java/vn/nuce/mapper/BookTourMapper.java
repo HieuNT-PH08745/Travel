@@ -20,6 +20,8 @@ public class BookTourMapper {
         bookTourDto.setNumAdult(bookTourEntity.getNumAdult());
         bookTourDto.setStatus(bookTourEntity.getStatus());
         bookTourDto.setCreateDate(bookTourEntity.getCreateDate());
+        bookTourDto.setDateConfirm(bookTourEntity.getDateConfirm());
+        bookTourDto.setPayStatus(bookTourEntity.getPayStatus());
 
         return bookTourDto;
     }
@@ -39,6 +41,8 @@ public class BookTourMapper {
         bookTourEntity.setNumAdult(bookTourDto.getNumAdult());
         bookTourEntity.setStatus(bookTourDto.getStatus());
         bookTourEntity.setCreateDate(bookTourDto.getCreateDate());
+        bookTourEntity.setDateConfirm(bookTourDto.getDateConfirm());
+        bookTourEntity.setPayStatus(bookTourDto.getPayStatus());
 
         return bookTourEntity;
     }

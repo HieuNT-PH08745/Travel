@@ -147,7 +147,7 @@
                             <c:otherwise>
                                 <div class="user_box ml-auto">
                                     <div class="user_box_login user_box_link"><a
-                                            href="/admin/home">Welcome, ${dto.user_Name}</a></div>
+                                            href="/home/user_info">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>
@@ -710,7 +710,7 @@
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <a href="/home/user_info" class="btn btn-lg" style="color: white; background-color: red"><i class="glyphicon glyphicon-remove"></i>Cancel</a>
+                                                    <a href="/home/user_info" class="btn btn-lg btn-danger"><i class="glyphicon glyphicon-remove"></i>Cancel</a>
                                                 </td>
                                             </tr>
                                         </table>

@@ -768,7 +768,7 @@
                                         <td>${list.numChild}</td>
                                         <td>${list.numAdult}</td>
                                         <td>
-                                            <button class="btn btn-lg" style="color: white; background-color: red" onclick="handleDelete(${list.registration_Id})">
+                                            <button class="btn btn-lg btn-danger" onclick="handleDelete(${list.registration_Id})">
                                                 <i class="glyphicon glyphicon-remove"></i>Hủy đặt
                                             </button>
                                         </td>

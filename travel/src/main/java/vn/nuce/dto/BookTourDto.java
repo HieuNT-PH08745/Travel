@@ -35,5 +35,7 @@ public class BookTourDto {
     private int numChild;
     private double price;
     private int status;
+    private int payStatus;
+    private Timestamp dateConfirm;
 
 }
