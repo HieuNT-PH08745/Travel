@@ -81,7 +81,20 @@ public class UserServiceImpl implements UserService {
         List<BookTourDto> bookTourDtos = bookTourService.findAll();
         List<BookTourDto> bookTourDtos1 = new ArrayList<>();
         for (BookTourDto bookTourDto : bookTourDtos) {
-            if (bookTourDto.getUserId() == id) {
+            if (bookTourDto.getUserId() == id && bookTourDto.getStatus() == 1) {
+                bookTourDtos1.add(bookTourDto);
+            }
+        }
+
+        return bookTourDtos1;
+    }
+
+    @Override
+    public List<BookTourDto> findBookTourWaitByUserId(Long id) {
+        List<BookTourDto> bookTourDtos = bookTourService.findAll();
+        List<BookTourDto> bookTourDtos1 = new ArrayList<>();
+        for (BookTourDto bookTourDto : bookTourDtos) {
+            if (bookTourDto.getUserId() == id && bookTourDto.getStatus() == 0) {
                 bookTourDtos1.add(bookTourDto);
             }
         }

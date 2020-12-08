@@ -36,8 +36,17 @@
         });
     </script>
     <script>
-        function format_curency(a) {
-            a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+
+        function loadNumber1() {
+            var va = document.getElementById("nguoilon").value;
+            var val = Math.round(va);
+            document.getElementById("nguoilon").value = val;
+        }
+
+        function loadNumber2() {
+            var va = document.getElementById("treem").value;
+            var val = Math.round(va);
+            document.getElementById("treem").value = val;
         }
 
         function requiredNumber1() {
@@ -50,7 +59,7 @@
 
         function requiredNumber2() {
             var va = document.getElementById("treem").value;
-            if (va < 0) {
+            if (va < 0 || Number.isInteger(va)) {
                 document.getElementById("treem").value = 0;
                 document.getElementById("treem-value").value = 0;
             }
@@ -130,7 +139,7 @@
                             <c:otherwise>
                                 <div class="user_box ml-auto">
                                     <div class="user_box_login user_box_link"><a
-                                            href="/admin/home">Welcome, ${dto.user_Name}</a></div>
+                                            href="/home/user_info">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>
@@ -639,7 +648,7 @@
                     <tr>
                         <td>Người lớn (9 tuổi trở lên)</td>
                         <td><input class="numbers" id="nguoilon" type="number" name="numAdult"
-                                   onchange="addNguoiLon(), requiredNumber1()" value="0"/></td>
+                                   onchange="addNguoiLon(), requiredNumber1(), loadNumber1()" value="0"/></td>
                         <td>
                             <input type="text" id="nguoilon-value"
                                    style="border: none; width: 75%; background-color: white; text-align: right" readonly
@@ -649,7 +658,7 @@
                     <tr>
                         <td>Trẻ em (6 đến 8 tuổi)</td>
                         <td><input class="numbers" id="treem" type="number" name="numChild"
-                                   onchange="addTreEm(), requiredNumber2()" value="0"/></td>
+                                   onchange="addTreEm(), requiredNumber2(), loadNumber2()" value="0"/></td>
                         <td>
                             <input type="text" id="treem-value"
                                    style="border: none; width: 75%; background-color: white; text-align: right" readonly

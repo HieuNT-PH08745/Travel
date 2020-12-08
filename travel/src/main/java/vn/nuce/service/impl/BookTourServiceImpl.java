@@ -10,6 +10,7 @@ import vn.nuce.repository.impl.BookTourRepositoryImpl;
 import vn.nuce.service.BookTourService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,7 +45,7 @@ public class BookTourServiceImpl implements BookTourService {
     }
 
     @Override
-    public void remove(BookTourDto bookTourDto) {
-
+    public void remove(List<Long> ids) {
+        bookTourRepository.delete(ids);
     }
 }

@@ -13,4 +13,5 @@ public interface UserService {
     UserDto findOneUser(Long id);
     UserDto updateUser(UserDto dto);
     List<BookTourDto> findBookTourByUserId(Long id);
+    List<BookTourDto> findBookTourWaitByUserId(Long id);
 }

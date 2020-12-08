@@ -12,5 +12,5 @@ public interface BookTourService {
 
     void save(BookTourDto bookTourDto);
 
-    void remove(BookTourDto bookTourDto);
+    void remove(List<Long> ids);
 }
