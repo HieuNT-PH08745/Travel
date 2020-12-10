@@ -885,14 +885,11 @@
                             <form:textarea class="forms" path="note" rows="10"/>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
-                            <select>
-                                <option>Chuyển khoản ngân hàng</option>
-                                <option>Thanh toán tại văn phòng</option>
-                            </select>
-                        </td>
-                    </tr>
+<%--                    <tr>--%>
+<%--                        <td colspan="2">--%>
+<%--                            <input type="radio" value="Chuyển khoản ngâ">--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
                 </table>
             </div>
         </div>
