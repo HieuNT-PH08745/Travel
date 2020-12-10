@@ -38,5 +38,6 @@ public class BookTourDto {
     private int status;
     private int payStatus;
     private Timestamp dateConfirm;
+    private String tourName;
 
 }

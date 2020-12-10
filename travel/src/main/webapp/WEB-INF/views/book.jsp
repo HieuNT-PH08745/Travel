@@ -23,8 +23,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/home/styles/main_styles.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/home/styles/responsive.css"/>">
 
-    <link rel="stylesheet" type="text/css"
-          href="<c:url value="/resources/home/css/books.css"/>">
+<%--    <link rel="stylesheet" type="text/css"--%>
+<%--          href="<c:url value="/resources/home/css/books.css"/>">--%>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -77,7 +77,7 @@
             var count = document.getElementById("treem").value;
             var values = document.getElementById("treem-value");
             var price = document.getElementById("tour_price").value;
-            values.value = count * ((price * 50) / 100);
+            values.value = count * ((price * 30) / 100);
             tinhtong();
         }
 
@@ -95,6 +95,156 @@
         .error {
             color: red;
             font-size: 10px;
+        }
+
+        div.container {
+            width: 100%;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .thongtin {
+            float: left;
+            width: 40%;
+            margin: 0;
+            padding: 1em;
+        }
+
+        .dangky {
+            margin-left: 170px;
+            padding: 1em;
+            overflow: hidden;
+        }
+
+        .title {
+            color: white;
+            background: linear-gradient(to right, #fa9e1b, #8d4fff);
+            border: 1px solid #ddd;
+            padding: 8px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            border-radius: 27px;
+            text-align: center;
+        }
+
+        #customers {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+        }
+
+        .forms {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 27px;
+            box-sizing: border-box;
+        }
+
+        .forms:focus {
+            background-color: #EEEEEE;
+        }
+
+        .forms::placeholder {
+            color: red;
+            text-align: right;
+            font-size: 20px;
+        }
+
+        .danhsach {
+            padding: 1em;
+            clear: left;
+            text-align: center;
+        }
+
+        .submits {
+            width: 25%;
+            /* background: linear-gradient(to right, #fa9e1b, #8d4fff); */
+            background-color: #fa9e1b;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 1px #ccc;
+            -webkit-transform-origin: 50% 50%;
+            -webkit-transition-duration: 0.5s;
+            -webkit-transition-timing-function: ease-out;
+            -webkit-box-shadow: 1000px 0px 0 0  #8d4fff inset, -1000px 0px 0 #8d4fff inset;
+        }
+
+        .submits:hover {
+            /* background: linear-gradient(to right, #8d4fff, #fa9e1b); */
+            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0  #8d4fff inset;
+        }
+
+        #add {
+            width: 30%;
+            float: left;
+            background-color: #fa9e1b;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 1px #ccc;
+            -webkit-transform-origin: 50% 50%;
+            -webkit-transition-duration: 0.5s;
+            -webkit-transition-timing-function: ease-out;
+            -webkit-box-shadow: 1000px 0px 0 0  #8d4fff inset, -1000px 0px 0 #8d4fff inset;
+        }
+
+        #add:hover {
+            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0  #8d4fff inset;
+        }
+
+        .buttons {
+            width: 100%;
+            background-color: #FF6666;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .buttons:hover {
+            background-color: #CC3300;
+        }
+
+
+        .numbers {
+            width: 60%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 27px;
+            box-sizing: border-box;
+        }
+
+        .numbers:focus {
+            background-color: #EEEEEE;
         }
     </style>
 </head>
@@ -627,22 +777,22 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>Thời gian:</td>
+                        <td style="font-weight: bold">Thời gian:</td>
                         <td style="text-align: right"><p style="color: black">${tour.tour_Day} ngày</p></td>
                     </tr>
                     <tr>
-                        <td>Địa điểm khởi hành:</td>
+                        <td style="font-weight: bold">Địa điểm khởi hành:</td>
                         <td style="text-align: right"><p style="color: black;">${tour.tour_Departurelocation}</p></td>
                     </tr>
                     <tr>
-                        <td>Giá:</td>
+                        <td style="font-weight: bold">Giá:</td>
                         <td style="text-align: right">
                             <input type="hidden" value="${tour.tour_Price}" id="tourPrice" >
                             <p id="tourPriceF" onload="load()" style="color: black"></p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Phương tiện:</td>
+                        <td style="font-weight: bold">Phương tiện:</td>
                         <td style="text-align: right">
                             <input type="hidden" value="${tour.tour_Vehicle}" id="tourVehicle">
                             <p id="tourVehicleF" style="color: black"></p>
@@ -735,6 +885,11 @@
                             <form:textarea class="forms" path="note" rows="10"/>
                         </td>
                     </tr>
+<%--                    <tr>--%>
+<%--                        <td colspan="2">--%>
+<%--                            <input type="radio" value="Chuyển khoản ngâ">--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
                 </table>
             </div>
         </div>

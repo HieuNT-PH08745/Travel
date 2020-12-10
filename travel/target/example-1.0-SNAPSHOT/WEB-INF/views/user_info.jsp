@@ -728,19 +728,26 @@
                             <table id="bookTour">
                                 <thead>
                                 <tr>
+                                    <th>Tên tour</th>
                                     <th>Giá</th>
                                     <th>Ngày đăng ký</th>
                                     <th>Số lượng trẻ em</th>
                                     <th>Số lượng người lớn</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTour}">
                                     <tr>
+                                        <td>${list.tourName}</td>
                                         <td>${list.price}</td>
                                         <td>${list.createDate}</td>
                                         <td>${list.numChild}</td>
                                         <td>${list.numAdult}</td>
+                                        <td>
+                                            <p id="payStatusF"></p>
+                                            <input type="hidden" value="${list.payStatus}" id="payStatus">
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -753,6 +760,7 @@
                             <table id="bookTour1">
                                 <thead>
                                 <tr>
+                                    <th>Tên tour</th>
                                     <th>Giá</th>
                                     <th>Ngày đăng ký</th>
                                     <th>Số lượng trẻ em</th>
@@ -763,6 +771,7 @@
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTourWait}">
                                     <tr>
+                                        <td>${list.tourName}</td>
                                         <td>${list.price}</td>
                                         <td>${list.createDate}</td>
                                         <td>${list.numChild}</td>
@@ -1004,6 +1013,16 @@
         }
         if (gender == 3) {
             gender_value.innerHTML = "Giới tính: Khác";
+        }
+
+        var pay = document.getElementById("payStatus").value;
+        var payF = document.getElementById("payStatusF");
+
+        if (pay == 0) {
+            payF.innerHTML = "Chưa thanh toán";
+        }
+        if (pay == 1) {
+            payF.innerHTML = "Đã thanh toán";
         }
     }
 

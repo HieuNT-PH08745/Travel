@@ -4,11 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.nuce.dto.BookTourDto;
+import vn.nuce.dto.TourDto;
 import vn.nuce.dto.UserDto;
 import vn.nuce.entity.UserEntity;
 import vn.nuce.mapper.UserMapper;
 import vn.nuce.repository.impl.UserRepositoryImpl;
 import vn.nuce.service.BookTourService;
+import vn.nuce.service.TourService;
 import vn.nuce.service.UserService;
 
 import java.sql.Timestamp;
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     BookTourService bookTourService;
+
+    @Autowired
+    TourService tourService;
 
     private ModelMapper mapper = null;
 
@@ -82,6 +87,8 @@ public class UserServiceImpl implements UserService {
         List<BookTourDto> bookTourDtos1 = new ArrayList<>();
         for (BookTourDto bookTourDto : bookTourDtos) {
             if (bookTourDto.getUserId() == id && bookTourDto.getStatus() == 1) {
+                TourDto tourDto = tourService.findOneTour(bookTourDto.getTourId());
+                bookTourDto.setTourName(tourDto.getTour_Name());
                 bookTourDtos1.add(bookTourDto);
             }
         }
@@ -95,6 +102,8 @@ public class UserServiceImpl implements UserService {
         List<BookTourDto> bookTourDtos1 = new ArrayList<>();
         for (BookTourDto bookTourDto : bookTourDtos) {
             if (bookTourDto.getUserId() == id && bookTourDto.getStatus() == 0) {
+                TourDto tourDto = tourService.findOneTour(bookTourDto.getTourId());
+                bookTourDto.setTourName(tourDto.getTour_Name());
                 bookTourDtos1.add(bookTourDto);
             }
         }
