@@ -23,6 +23,7 @@ public class TourDto implements Serializable {
     private Timestamp tour_Createdate;
     private Long tour_Status;
     private int tour_Vehicle;
+    private long tour_Day;
 
     public Long getTour_Id() {
         return tour_Id;
@@ -118,5 +119,13 @@ public class TourDto implements Serializable {
 
     public void setTour_Vehicle(int tour_Vehicle) {
         this.tour_Vehicle = tour_Vehicle;
+    }
+
+    public long getTour_Day() {
+        return tour_Day;
+    }
+
+    public void setTour_Day(long tour_Day) {
+        this.tour_Day = tour_Day;
     }
 }

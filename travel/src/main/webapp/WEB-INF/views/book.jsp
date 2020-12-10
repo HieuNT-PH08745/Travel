@@ -59,7 +59,7 @@
 
         function requiredNumber2() {
             var va = document.getElementById("treem").value;
-            if (va < 0 || Number.isInteger(va)) {
+            if (va < 0) {
                 document.getElementById("treem").value = 0;
                 document.getElementById("treem-value").value = 0;
             }
@@ -628,7 +628,7 @@
                     </tr>
                     <tr>
                         <td>Thời gian:</td>
-                        <td style="text-align: right"><p style="color: black">${tour.tour_Departureday} ngày</p></td>
+                        <td style="text-align: right"><p style="color: black">${tour.tour_Day} ngày</p></td>
                     </tr>
                     <tr>
                         <td>Địa điểm khởi hành:</td>
@@ -639,6 +639,13 @@
                         <td style="text-align: right">
                             <input type="hidden" value="${tour.tour_Price}" id="tourPrice" >
                             <p id="tourPriceF" onload="load()" style="color: black"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phương tiện:</td>
+                        <td style="text-align: right">
+                            <input type="hidden" value="${tour.tour_Vehicle}" id="tourVehicle">
+                            <p id="tourVehicleF" style="color: black"></p>
                         </td>
                     </tr>
                 </table>
@@ -924,6 +931,17 @@
         var val = document.getElementById("tourPrice").value;
         var valF = val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         document.getElementById("tourPriceF").innerHTML = valF + " vnđ/người";
+        var vehicle = document.getElementById("tourVehicle").value;
+        var vehicleF = document.getElementById("tourVehicleF");
+        if (vehicle == 0) {
+            vehicleF.innerHTML = "Ô tô";
+        }
+        if (vehicle == 1) {
+            vehicleF.innerHTML = "Máy bay";
+        }
+        if (vehicle == 2) {
+            vehicleF.innerHTML = "Ô tô & Máy bay";
+        }
     }
 </script>
 </html>
