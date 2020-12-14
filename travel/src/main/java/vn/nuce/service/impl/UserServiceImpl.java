@@ -28,7 +28,8 @@ public class UserServiceImpl implements UserService {
     BookTourService bookTourService;
 
     @Autowired
-    TourRepository tourRepository;
+    TourService tourService;
+
     private ModelMapper mapper = null;
 
     private ModelMapper getInstanceMapper() {

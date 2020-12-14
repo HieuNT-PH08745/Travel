@@ -15,5 +15,5 @@ public interface BookTourService {
 
     void remove(List<Long> ids);
 
-    TourDto findTour(Long id);
+    List<BookTourDto> findListWait();
 }

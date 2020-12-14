@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class BookTourEntity implements Serializable {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long registration_Id;
 
     @Column(name = "registration_Name")
@@ -57,5 +57,11 @@ public class BookTourEntity implements Serializable {
 
     @Column(name = "registration_DateConfirm")
     private Timestamp dateConfirm;
+
+    @Column(name = "registration_TourName")
+    private String tourName;
+
+    @Column(name = "registration_Payment")
+    private int payment;
 
 }

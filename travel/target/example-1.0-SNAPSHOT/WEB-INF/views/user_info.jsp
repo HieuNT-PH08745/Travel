@@ -731,22 +731,27 @@
                                     <th>Tên tour</th>
                                     <th>Giá</th>
                                     <th>Ngày đăng ký</th>
-                                    <th>Số lượng trẻ em</th>
-                                    <th>Số lượng người lớn</th>
                                     <th>Trạng thái</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTour}">
                                     <tr>
-                                        <td>${list.tourName}</td>
-                                        <td>${list.price}</td>
-                                        <td>${list.createDate}</td>
-                                        <td>${list.numChild}</td>
-                                        <td>${list.numAdult}</td>
+                                        <td><p style="color: black">${list.tourName}</p></td>
                                         <td>
-                                            <p id="payStatusF"></p>
+                                            <p id="bookTourPriceF" style="color: black"></p>
+                                            <input type="hidden" value="${list.price}" id="bookTourPrice">
+                                        </td>
+                                        <td><p style="color: black">${list.createDateFormat}</p></td>
+                                        <td>
+                                            <p id="payStatusF" style="color: black"></p>
                                             <input type="hidden" value="${list.payStatus}" id="payStatus">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-lg btn-success">
+                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết
+                                            </button>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -763,19 +768,24 @@
                                     <th>Tên tour</th>
                                     <th>Giá</th>
                                     <th>Ngày đăng ký</th>
-                                    <th>Số lượng trẻ em</th>
-                                    <th>Số lượng người lớn</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTourWait}">
                                     <tr>
-                                        <td>${list.tourName}</td>
-                                        <td>${list.price}</td>
-                                        <td>${list.createDate}</td>
-                                        <td>${list.numChild}</td>
-                                        <td>${list.numAdult}</td>
+                                        <td><p style="color: black">${list.tourName}</p></td>
+                                        <td>
+                                            <p id="bookTourPriceWF" style="color: black"></p>
+                                            <input type="hidden" value="${list.price}" id="bookTourPriceW">
+                                        </td>
+                                        <td><p style="color: black">${list.createDateFormat}</p></td>
+                                        <td>
+                                            <button class="btn btn-lg btn-success">
+                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết
+                                            </button>
+                                        </td>
                                         <td>
                                             <button class="btn btn-lg btn-danger" onclick="handleDelete(${list.registration_Id})">
                                                 <i class="glyphicon glyphicon-remove"></i>Hủy đặt
@@ -1024,6 +1034,14 @@
         if (pay == 1) {
             payF.innerHTML = "Đã thanh toán";
         }
+
+        var price = document.getElementById("bookTourPrice").value;
+        var priceF = price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        document.getElementById("bookTourPriceF").innerHTML = priceF + " vnđ";
+
+        var price = document.getElementById("bookTourPriceW").value;
+        var priceF = price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        document.getElementById("bookTourPriceWF").innerHTML = priceF + " vnđ";
     }
 
     function handleDelete(id) {

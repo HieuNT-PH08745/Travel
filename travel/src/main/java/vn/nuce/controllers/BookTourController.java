@@ -96,8 +96,6 @@ public class BookTourController {
             return "book";
         } else {
             setUser(httpSession, modelMap);
-            List<BookTourDto> dtos = bookTourService.findAll();
-            bookTourDto.setRegistration_Id((long) (dtos.size() + 1));
             bookTourDto.setTourId(id);
             bookTourDto.setStatus(0);
             bookTourDto.setPayStatus(0);
@@ -108,6 +106,7 @@ public class BookTourController {
             bookTourDto.setNumAdult(Integer.parseInt(numAdult));
             bookTourDto.setNumChild(Integer.parseInt(numChild));
             bookTourDto.setPrice(Double.parseDouble(price));
+            bookTourDto.setTourName(tourDto.getTour_Name());
             UserDto userDto = (UserDto) httpSession.getAttribute("user");
             if (userDto != null) {
                 Long userID = userDto.getUser_Id();
@@ -122,7 +121,7 @@ public class BookTourController {
                 }
                 if (uId == -1) {
                     UserDto userDto1 = new UserDto();
-                    userDto1.setUser_Id((long) (userDtos.size() + 1));
+//                    userDto1.setUser_Id((long) (userDtos.size() + 1));
                     userDto1.setUser_Name("user" + (userDtos.size() + 1));
                     String s;
                     do {

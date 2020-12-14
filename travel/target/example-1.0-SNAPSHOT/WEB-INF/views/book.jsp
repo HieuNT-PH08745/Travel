@@ -23,8 +23,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/home/styles/main_styles.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/home/styles/responsive.css"/>">
 
-<%--    <link rel="stylesheet" type="text/css"--%>
-<%--          href="<c:url value="/resources/home/css/books.css"/>">--%>
+    <%--    <link rel="stylesheet" type="text/css"--%>
+    <%--          href="<c:url value="/resources/home/css/books.css"/>">--%>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -51,9 +51,10 @@
 
         function requiredNumber1() {
             var va = document.getElementById("nguoilon").value;
-            if (va < 0) {
-                document.getElementById("nguoilon").value = 0;
-                document.getElementById("nguoilon-value").value = 0;
+            var values = document.getElementById("tour_price").value;
+            if (va <= 0) {
+                document.getElementById("nguoilon").value = 1;
+                document.getElementById("nguoilon-value").value = values;
             }
         }
 
@@ -138,10 +139,6 @@
             padding: 8px;
         }
 
-        #customers tr:hover {
-            background-color: #ddd;
-        }
-
         #customers th {
             padding-top: 12px;
             padding-bottom: 12px;
@@ -188,12 +185,12 @@
             -webkit-transform-origin: 50% 50%;
             -webkit-transition-duration: 0.5s;
             -webkit-transition-timing-function: ease-out;
-            -webkit-box-shadow: 1000px 0px 0 0  #8d4fff inset, -1000px 0px 0 #8d4fff inset;
+            -webkit-box-shadow: 1000px 0px 0 0 #8d4fff inset, -1000px 0px 0 #8d4fff inset;
         }
 
         .submits:hover {
             /* background: linear-gradient(to right, #8d4fff, #fa9e1b); */
-            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0  #8d4fff inset;
+            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0 #8d4fff inset;
         }
 
         #add {
@@ -210,11 +207,11 @@
             -webkit-transform-origin: 50% 50%;
             -webkit-transition-duration: 0.5s;
             -webkit-transition-timing-function: ease-out;
-            -webkit-box-shadow: 1000px 0px 0 0  #8d4fff inset, -1000px 0px 0 #8d4fff inset;
+            -webkit-box-shadow: 1000px 0px 0 0 #8d4fff inset, -1000px 0px 0 #8d4fff inset;
         }
 
         #add:hover {
-            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0  #8d4fff inset;
+            -webkit-box-shadow: 0px 0px 0 0 #8d4fff inset, 0px 0px 0 #8d4fff inset;
         }
 
         .buttons {
@@ -231,7 +228,6 @@
         .buttons:hover {
             background-color: #CC3300;
         }
-
 
         .numbers {
             width: 60%;
@@ -768,7 +764,7 @@
     <!-- Main -->
     <form:form method="POST" modelAttribute="bookTourDto">
         <div class="container">
-            <h3 style="text-align: center; color: #8d4fff"; font-weight: bolder;>${tour.tour_Name}</h3>
+            <h3 style="text-align: center; color: #8d4fff" ; font-weight: bolder;>${tour.tour_Name}</h3>
             <div class="thongtin">
                 <h3 class="title">THÔNG TIN TOUR</h3>
                 <table style="width: 100%">
@@ -787,7 +783,7 @@
                     <tr>
                         <td style="font-weight: bold">Giá:</td>
                         <td style="text-align: right">
-                            <input type="hidden" value="${tour.tour_Price}" id="tourPrice" >
+                            <input type="hidden" value="${tour.tour_Price}" id="tourPrice">
                             <p id="tourPriceF" onload="load()" style="color: black"></p>
                         </td>
                     </tr>
@@ -813,11 +809,11 @@
                     <tr>
                         <td>Người lớn (9 tuổi trở lên)</td>
                         <td><input class="numbers" id="nguoilon" type="number" name="numAdult"
-                                   onchange="addNguoiLon(), requiredNumber1(), loadNumber1()" value="0"/></td>
+                                   onchange="addNguoiLon(), requiredNumber1(), loadNumber1()" value="1"/></td>
                         <td>
                             <input type="text" id="nguoilon-value"
                                    style="border: none; width: 75%; background-color: white; text-align: right" readonly
-                                   value="0">vnđ
+                                   value="${tour.tour_Price}">vnđ
                         </td>
                     </tr>
                     <tr>
@@ -837,7 +833,7 @@
                         <td>
                             <input type="text" id="tongtien" name="price"
                                    style="border: none; width: 75%; background-color: white; text-align: right"
-                                   readonly="true" value="0"/>vnđ
+                                   readonly="true" value="${tour.tour_Price}"/>vnđ
                         </td>
                     </tr>
                 </table>
@@ -882,14 +878,45 @@
                     <tr>
                         <td colspan="2">
                             <label>Ghi chú:</label>
-                            <form:textarea class="forms" path="note" rows="10"/>
+                            <form:textarea class="forms" path="note" rows="10"/><br/>
                         </td>
                     </tr>
-<%--                    <tr>--%>
-<%--                        <td colspan="2">--%>
-<%--                            <input type="radio" value="Chuyển khoản ngâ">--%>
-<%--                        </td>--%>
-<%--                    </tr>--%>
+                    <tr>
+                        <td colspan="2">
+                            <input type="radio" id="male" name="gender" value="male" onclick="clickCK()" checked>
+                            <label for="male">Chuyển khoản ngân hàng</label><br>
+
+                            <div id="payCK" style="display: block">
+                                <p style="color: black; margin: 10px">THÔNG TIN THANH TOÁN CHUYỂN KHOẢN</p>
+
+                                <p style="color: black; margin: 10px"> - Ngân hàng TMCP Ngoại Thương Việt Nam - CN TP.HCM (VCB)</p>
+
+                                <p style="color: black; margin: 10px"> - Tên đơn vị hưởng: CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH BẾN THÀNH</p>
+
+                                <p style="color: black; margin: 10px"> - Số tài khoản VNĐ: 007.‎‎1001204617</p>
+
+                                <p style="color: black; margin: 10px"> - Tại Ngân Hàng VCB - CN TP.HCM</p>
+                            </div><br/>
+                            <input type="radio" id="female" name="gender" value="female" onclick="clickTM()">
+                            <label for="female">Thanh toán tại văn phòng</label><br>
+                            <div id="payTM" style="display: none">
+                                <p style="color: black; margin: 10px">CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH BẾN THÀNH</p>
+
+                                <p style="color: black; margin: 10px">(BENTHANH TOURIST)</p>
+
+                                <p style="color: black; margin: 10px">Trụ sở: 82-84 Calmette, P.Nguyễn Thái Bình, Quận 1, Tp.Hồ Chí Minh</p>
+
+                                <p style="color: black; margin: 10px">Điện thoại: 028.38227788</p>
+
+                                <p style="color: black; margin: 10px">Tổng đài: 1900 6668</p>
+
+                                <p style="color: black; margin: 10px">Fax: 028.3829 5060</p>
+
+                                <p style="color: black; margin: 10px">Email: benthanh@benthanhtourist.com</p>
+                            </div><br/>
+                            <form:input type="hidden" id="bookTourPayment" path="payment" value="0"/>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -1082,6 +1109,18 @@
 
 </body>
 <script>
+    function clickCK() {
+        document.getElementById("payCK").style.display = "block";
+        document.getElementById("payTM").style.display = "none";
+        document.getElementById("bookTourPayment").value = 0;
+    }
+
+    function clickTM() {
+        document.getElementById("payTM").style.display = "block";
+        document.getElementById("payCK").style.display = "none";
+        document.getElementById("bookTourPayment").value = 1;
+    }
+
     window.onload = function () {
         var val = document.getElementById("tourPrice").value;
         var valF = val.replace(/\B(?=(\d{3})+(?!\d))/g, ',');

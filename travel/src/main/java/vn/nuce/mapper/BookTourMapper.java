@@ -3,6 +3,8 @@ package vn.nuce.mapper;
 import vn.nuce.dto.BookTourDto;
 import vn.nuce.entity.BookTourEntity;
 
+import java.time.format.DateTimeFormatter;
+
 public class BookTourMapper {
 
     public static BookTourDto toBookTourDto(BookTourEntity bookTourEntity) {
@@ -22,6 +24,10 @@ public class BookTourMapper {
         bookTourDto.setCreateDate(bookTourEntity.getCreateDate());
         bookTourDto.setDateConfirm(bookTourEntity.getDateConfirm());
         bookTourDto.setPayStatus(bookTourEntity.getPayStatus());
+        bookTourDto.setTourName(bookTourEntity.getTourName());
+        bookTourDto.setPayment(bookTourEntity.getPayment());
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        bookTourDto.setCreateDateFormat(bookTourEntity.getCreateDate().toLocalDateTime().toLocalDate().format(formatters));
 
         return bookTourDto;
     }
@@ -43,6 +49,8 @@ public class BookTourMapper {
         bookTourEntity.setCreateDate(bookTourDto.getCreateDate());
         bookTourEntity.setDateConfirm(bookTourDto.getDateConfirm());
         bookTourEntity.setPayStatus(bookTourDto.getPayStatus());
+        bookTourEntity.setTourName(bookTourDto.getTourName());
+        bookTourEntity.setPayment(bookTourDto.getPayment());
 
         return bookTourEntity;
     }

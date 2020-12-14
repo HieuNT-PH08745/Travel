@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.nuce.dto.BookTourDto;
+import vn.nuce.dto.TourDto;
 import vn.nuce.dto.UserDto;
 import vn.nuce.service.BookTourService;
 import vn.nuce.service.TourService;
@@ -48,11 +49,6 @@ public class UserInfoController {
         return "user_info";
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
-    public BookTourDto getBookTour(@PathVariable Long id) {
-        return bookTourService.findById(id);
-    }
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam(name = "action") String action, @RequestParam(name = "id") Long id, HttpSession httpSession) {

@@ -5,11 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.format.annotation.DateTimeFormat;
 import vn.nuce.validator.Phone;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -39,5 +42,6 @@ public class BookTourDto {
     private int payStatus;
     private Timestamp dateConfirm;
     private String tourName;
-
+    private String createDateFormat;
+    private int payment;
 }
