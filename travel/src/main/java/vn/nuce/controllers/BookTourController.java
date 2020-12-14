@@ -122,7 +122,7 @@ public class BookTourController {
                 if (uId == -1) {
                     UserDto userDto1 = new UserDto();
 //                    userDto1.setUser_Id((long) (userDtos.size() + 1));
-                    userDto1.setUser_Name("user" + (userDtos.size() + 1));
+                    userDto1.setUser_Name(bookTourDto.getPhone());
                     String s;
                     do {
                         s = new String(new java.util.Random().ints(15, 33, 127)
@@ -162,15 +162,20 @@ public class BookTourController {
                     bookTourDto.setUserId(uId);
                 }
             }
+            List<BookTourDto> bookTourDtos = userService.findBookTourWaitByUserId(bookTourDto.getUserId());
+            if (bookTourDtos.isEmpty()) {
+                try {
+                    bookTourService.save(bookTourDto);
+                    sendMail(bookTourDto, tourDto);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            try {
-                bookTourService.save(bookTourDto);
-                sendMail(bookTourDto, tourDto);
-            } catch (Exception e) {
-                e.printStackTrace();
+                return "success";
             }
-
-            return "/success";
+            else {
+                return "denied";
+            }
         }
     }
 

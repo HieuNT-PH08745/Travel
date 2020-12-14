@@ -55,25 +55,4 @@ public class BookTourServiceImpl implements BookTourService {
         bookTourRepository.delete(ids);
     }
 
-    @Override
-    public List<BookTourDto> findListWait() {
-        List<BookTourEntity> bookTourEntities = bookTourRepository.findAll();
-        List<BookTourDto> bookTourDtos = new ArrayList<>();
-        List<BookTourDto> bookTourDtos1 = new ArrayList<>();
-
-        if (bookTourEntities.size()>0) {
-            for (BookTourEntity bookTourEntity : bookTourEntities) {
-                bookTourDtos.add(BookTourMapper.toBookTourDto(bookTourEntity));
-            }
-        }
-
-        for (BookTourDto bookTourDto : bookTourDtos) {
-            if (bookTourDto.getStatus() == 0) {
-                bookTourDtos1.add(bookTourDto);
-            }
-        }
-
-        return bookTourDtos1;
-    }
-
 }

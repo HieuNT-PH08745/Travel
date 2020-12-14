@@ -710,8 +710,7 @@
                                             <td>
                                                 <a class="btn btn-lg" style="background-color: #fa9e1b; color: white;"
                                                    href="/home/user_info/update"><i
-                                                        class="glyphicon glyphicon-pencil"></i> Chỉnh sửa thông tin tài
-                                                    khoản</a>
+                                                        class="glyphicon glyphicon-pencil"></i> Đổi mật khẩu</a>
                                             </td>
                                         </tr>
                                     </table>

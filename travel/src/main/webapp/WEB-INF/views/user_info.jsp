@@ -156,7 +156,7 @@
                             <c:otherwise>
                                 <div class="user_box ml-auto">
                                     <div class="user_box_login user_box_link"><a
-                                            href="/admin/home">Welcome, ${dto.user_Name}</a></div>
+                                            href="/home/user_info">Welcome, ${dto.user_Name}</a></div>
                                     <div class="user_box_register user_box_link"><a href="${logoutUrl}">logout</a></div>
                                 </div>
                             </c:otherwise>
@@ -710,8 +710,7 @@
                                             <td>
                                                 <a class="btn btn-lg" style="background-color: #fa9e1b; color: white;"
                                                    href="/home/user_info/update"><i
-                                                        class="glyphicon glyphicon-pencil"></i> Chỉnh sửa thông tin tài
-                                                    khoản</a>
+                                                        class="glyphicon glyphicon-pencil"></i> Đổi mật khẩu</a>
                                             </td>
                                         </tr>
                                     </table>
