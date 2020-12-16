@@ -623,7 +623,7 @@
     </div>
     <br/><br/>
     <!--Main-->
-    <center><h2>ĐỔI THÔNG TIN TÀI KHOẢN</h2></center>
+    <center><h2>ĐỔI MẬT KHẨU</h2></center>
     <hr>
     <form:form method="POST" modelAttribute="dto" enctype="multipart/form-data">
         <div class="container bootstrap snippet">
@@ -636,11 +636,6 @@
                             <img src="data:image;base64,${dto.base64Image}"
                                  class="avatar img-circle img-thumbnail"
                                  alt="avatar">
-                            <div class="file btn btn-lg btn-primary">
-                                Đổi ảnh đại diện
-                                <input type="file" name="file" id="file"
-                                       class="in text-center center-block file-upload"/>
-                            </div>
                         </div>
                     </div>
                     <br>
@@ -656,22 +651,21 @@
 
                                     <div class="col-xs-12">
                                         <label>
-                                            <h4>Họ và tên</h4>
+                                            <h4>Mật khẩu hiện tại:</h4>
                                         </label>
-                                        <form:input type="text" class="form-control" path="user_Fullname"
-                                                    placeholder="*" id="uFullName" oninput="validateFullName()"/><br/>
-                                        <form:input type="hidden" class="form-control" path="user_Id" placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="image" placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="user_Createdate"
-                                                    placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="user_Role"
-                                                    placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="user_Name"
-                                                    placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="user_Password"
-                                                    placeholder="*"/>
-                                        <form:input type="hidden" class="form-control" path="user_Status"
-                                                    placeholder="*"/>
+                                        <input type="password" class="form-control" name="password" id="user-password" oninput="checkPass()"/><br/>
+                                        <p style="display: none; color: red" id="error-pass">Không đúng mật khẩu hiện tại!</p>
+                                        <form:input type="hidden" path="user_Fullname"/>
+                                        <form:input type="hidden" path="user_Id"/>
+                                        <form:input type="hidden" path="image"/>
+                                        <form:input type="hidden" path="user_Createdate"/>
+                                        <form:input type="hidden" path="user_Role"/>
+                                        <form:input type="hidden" path="user_Name"/>
+                                        <input type="hidden" value="${dto.user_Password}" id="current-password"/>
+                                        <form:input type="hidden" path="user_Gender"/>
+                                        <form:input type="hidden" path="user_Phone"/>
+                                        <form:input type="hidden" path="user_Email"/>
+                                        <form:input type="hidden" path="user_Status"/>
                                     </div>
                                 </div>
 
@@ -679,13 +673,9 @@
 
                                     <div class="col-xs-12">
                                         <label>
-                                            <h4>Giới tính</h4>
+                                            <h4>Mật khẩu mới:</h4>
                                         </label>
-                                        <form:select path="user_Gender" class="form-control" style="height: 34px;">
-                                            <option value="1">Nam</option>
-                                            <option value="2">Nữ</option>
-                                            <option value="3">Khác</option>
-                                        </form:select><br/>
+                                        <input type="password" class="form-control" name="newPass" id="new-pass"><br/>
                                     </div>
                                 </div>
 
@@ -693,47 +683,26 @@
 
                                     <div class="col-xs-12">
                                         <label>
-                                            <h4>Số điện thoại</h4>
+                                            <h4>Xác nhận mật khẩu:</h4>
                                         </label>
-                                        <form:input type="text" class="form-control" path="user_Phone" placeholder="*"
-                                                    id="uPhone" oninput="validatePhone()"/><br/>
-                                        <p id="pBlank" style="color: red; display: none">Không được để trống số điện thoại</p>
-                                        <p id="pFormat" style="color: red; display: none">Không đúng định dạng số điện thoại</p>
-                                        <p id="pUnique" style="color: red; display: none">Số điện thoại đã được đăng ký ở tài khoản khác</p>
-                                        <c:forEach var="list" items="${listPhone}">
-                                            <input type="hidden" name="arrayP[]" value="${list}"/>
-                                        </c:forEach>
+                                        <input type="password" class="form-control" id="new-pass-confirm" oninput="checkNewPass()"><br/>
+                                        <p style="display: none; color: red" id="error-newPass">Xác nhận mật khẩu không đúng!</p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <label>
-                                            <h4>Email</h4>
-                                        </label>
-                                        <form:input type="text" class="form-control" path="user_Email" placeholder="*"
-                                                    id="uEmail" oninput="validateEmail()"/><br/>
-                                        <p id="eBlank" style="color: red; display: none">Không được để trống email</p>
-                                        <p id="eFormat" style="color: red; display: none">Không đúng định dạng email</p>
-                                        <p id="eUnique" style="color: red; display: none">Email đã được đăng ký ở tài khoản khác</p>
-                                        <c:forEach var="list" items="${listEmail}">
-                                            <input type="hidden" name="arrayE[]" value="${list}"/>
-                                        </c:forEach>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
                                         <table border="0">
                                             <tr>
                                                 <td>
-                                                    <button class="btn btn-lg btn-success" type="submit" id="btnSub"><i
-                                                            class="glyphicon glyphicon-ok-sign"></i> Save
+                                                    <button class="btn btn-lg btn-success" type="submit" disabled="true" id="change-pass">
+                                                        <i class="glyphicon glyphicon-ok-sign"></i> Thay đổi mật khẩu
                                                     </button>&nbsp&nbsp
                                                 </td>
                                                 <td>
                                                     <a href="/home/user_info" class="btn btn-lg btn-danger"><i
-                                                            class="glyphicon glyphicon-remove"></i>Cancel</a>
+                                                            class="glyphicon glyphicon-remove"></i>Hủy</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -951,81 +920,34 @@
         });
     });
 
-    function validateFullName() {
-        var uFullName = document.getElementById("uFullName").value;
-
-        if (uFullName.length == 0) {
-            document.getElementById("btnSub").disabled = true;
-        } else {
-            document.getElementById("btnSub").disabled = false;
+    function checkPass() {
+        var pass = document.getElementById("user-password").value;
+        var currentPass = document.getElementById("current-password").value;
+        if (pass != currentPass) {
+            document.getElementById("error-pass").style.display = "block";
+        }
+        else {
+            document.getElementById("error-pass").style.display = "none";
         }
     }
 
-    function validatePhone() {
-        var uPhone = document.getElementById("uPhone").value;
-        const re = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        var aa = document.getElementsByName("arrayP[]");
-        var kt = false;
-
-        if (uPhone.length == 0) {
-            document.getElementById("btnSub").disabled = true;
-            document.getElementById("pBlank").style.display = "block";
-        } else {
-            document.getElementById("pBlank").style.display = "none";
-            if (re.test(uPhone) == false) {
-                document.getElementById("btnSub").disabled = true;
-                document.getElementById("pFormat").style.display = "block";
-            } else {
-                document.getElementById("pFormat").style.display = "none";
-                for (var i = 0; i < aa.length; i++) {
-                    var a = aa[i];
-                    if (!(String(uPhone)).localeCompare(String(a.value))) {
-                        kt = true;
-                    }
-                }
-                if (kt == true) {
-                    document.getElementById("btnSub").disabled = true;
-                    document.getElementById("pUnique").style.display = "block";
-                }
-                else {
-                    document.getElementById("btnSub").disabled = false;
-                    document.getElementById("pUnique").style.display = "none";
-                }
-            }
+    function checkNewPass() {
+        var newPass = document.getElementById("new-pass").value;
+        var confirmPass = document.getElementById("new-pass-confirm").value;
+        var pass = document.getElementById("user-password").value;
+        var currentPass = document.getElementById("current-password").value;
+        if(newPass != confirmPass) {
+            document.getElementById("error-newPass").style.display = "block";
         }
-    }
-
-    function validateEmail() {
-        var uEmail = document.getElementById("uEmail").value;
-        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        var aa = document.getElementsByName("arrayE[]");
-        var kt = false;
-
-        if (uEmail.length == 0) {
-            document.getElementById("btnSub").disabled = true;
-            document.getElementById("eBlank").style.display = "block";
-        } else {
-            document.getElementById("eBlank").style.display = "none";
-            if (re.test(String(uEmail).toLowerCase()) == false) {
-                document.getElementById("btnSub").disabled = true;
-                document.getElementById("eFormat").style.display = "block";
-            } else {
-                document.getElementById("eFormat").style.display = "none";
-                for (var i = 0; i < aa.length; i++) {
-                    var a = aa[i];
-                    if (!(String(uEmail)).localeCompare(String(a.value))) {
-                        kt = true;
-                    }
-                }
-                if (kt == true) {
-                    document.getElementById("btnSub").disabled = true;
-                    document.getElementById("eUnique").style.display = "block";
-                }
-                else {
-                    document.getElementById("btnSub").disabled = false;
-                    document.getElementById("eUnique").style.display = "none";
-                }
-            }
+        else {
+            document.getElementById("error-newPass").style.display = "none";
         }
+        if (newPass == confirmPass && pass == currentPass) {
+            document.getElementById("change-pass").disabled = false;
+        }
+        else {
+            document.getElementById("change-pass").disabled = true;
+        }
+
     }
 </script>

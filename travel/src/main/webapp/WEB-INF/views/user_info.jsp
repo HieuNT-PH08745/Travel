@@ -705,11 +705,11 @@
                                                 <a class="btn btn-lg" style="background-color: #fa9e1b; color: white;"
                                                    href="/home/user_info/update"><i
                                                         class="glyphicon glyphicon-user"></i> Chỉnh sửa thông tin cá
-                                                    nhân</a>
+                                                    nhân</a>&nbsp&nbsp
                                             </td>
                                             <td>
                                                 <a class="btn btn-lg" style="background-color: #fa9e1b; color: white;"
-                                                   href="/home/user_info/update"><i
+                                                   href="/home/user_info/change_password"><i
                                                         class="glyphicon glyphicon-pencil"></i> Đổi mật khẩu</a>
                                             </td>
                                         </tr>
@@ -728,30 +728,30 @@
                                 <thead>
                                 <tr>
                                     <th>Tên tour</th>
-                                    <th>Giá</th>
+<%--                                    <th>Giá</th>--%>
                                     <th>Ngày đăng ký</th>
                                     <th>Trạng thái</th>
-                                    <th></th>
+<%--                                    <th></th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTour}">
                                     <tr>
                                         <td><p style="color: black">${list.tourName}</p></td>
-                                        <td>
-                                            <p id="bookTourPriceF" style="color: black"></p>
-                                            <input type="hidden" value="${list.price}" id="bookTourPrice">
-                                        </td>
+<%--                                        <td>--%>
+<%--                                            <p id="bookTourPriceF" style="color: black"></p>--%>
+<%--                                            <input type="hidden" value="${list.price}" id="bookTourPrice">--%>
+<%--                                        </td>--%>
                                         <td><p style="color: black">${list.createDateFormat}</p></td>
                                         <td>
                                             <p id="payStatusF" style="color: black"></p>
                                             <input type="hidden" value="${list.payStatus}" id="payStatus">
                                         </td>
-                                        <td>
-                                            <button class="btn btn-lg btn-success">
-                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết
-                                            </button>
-                                        </td>
+<%--                                        <td>--%>
+<%--                                            <button class="btn btn-lg btn-success">--%>
+<%--                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết--%>
+<%--                                            </button>--%>
+<%--                                        </td>--%>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

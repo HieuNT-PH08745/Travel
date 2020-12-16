@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.format.annotation.DateTimeFormat;
 import vn.nuce.validator.Phone;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -22,14 +19,14 @@ public class BookTourDto {
 
     private Long registration_Id;
 
-    @NotBlank
+    @NotBlank(message = "Không được để trống tên")
     private String name;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Không được để trống email")
+    @Email(message = "Không đúng định dạng email")
     private String email;
 
-    @Phone(message = "Phone number is not valid")
+    @Phone(message = "Không đúng định dạng số điện thoại")
     private String phone;
     private String note;
     private Long tourId;

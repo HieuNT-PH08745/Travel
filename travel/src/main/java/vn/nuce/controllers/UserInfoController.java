@@ -3,6 +3,7 @@ package vn.nuce.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.nuce.dto.BookTourDto;
@@ -13,6 +14,7 @@ import vn.nuce.service.TourService;
 import vn.nuce.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -68,27 +70,55 @@ public class UserInfoController {
             UserDto dto = userService.findOneUser(dto1.getUser_Id());
             dto.setBase64Image(Base64.getEncoder().encodeToString(dto.getImage()));
             modelMap.addAttribute("dto", dto);
+            List<UserDto> userDtos = userService.findAllUsers();
+            List<String> emails = new ArrayList<>();
+            List<String> phones = new ArrayList<>();
+            for (UserDto userDto : userDtos) {
+                if (userDto.getUser_Id() != dto.getUser_Id()) {
+                    emails.add(userDto.getUser_Email());
+                    phones.add(userDto.getUser_Phone());
+                }
+            }
+            modelMap.addAttribute("listEmail", emails);
+            modelMap.addAttribute("listPhone", phones);
         }
         return "update_user";
     }
 
     @PostMapping("/user_info/update")
-    public String updateUser(@ModelAttribute("dto") UserDto userDto, @RequestParam(name = "file") MultipartFile image, HttpSession httpSession, ModelMap modelMap) {
-        System.out.println(image.getOriginalFilename());
+    public String updateUser(@ModelAttribute("dto") UserDto userDto, @RequestParam(name = "file") MultipartFile image) {
         try {
             if (!image.getOriginalFilename().isEmpty()) {
-
-
                 userDto.setImage(image.getBytes());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            userDto.setUser_Lastupdate(Timestamp.valueOf(LocalDateTime.now()));
+            userDto.setBase64Image(Base64.getEncoder().encodeToString(userDto.getImage()));
+            userService.updateUser(userDto);
+            return "redirect:/home/user_info";
+        } catch (Exception e) {
+            return "error";
         }
+    }
+
+    @GetMapping("/user_info/change_password")
+    public String showChangePassword(HttpSession session, ModelMap modelMap) {
+        if (session.getAttribute("user") != null) {
+            UserDto dto1 = (UserDto) session.getAttribute("user");
+            UserDto dto = userService.findOneUser(dto1.getUser_Id());
+            dto.setBase64Image(Base64.getEncoder().encodeToString(dto.getImage()));
+            modelMap.addAttribute("dto", dto);
+        }
+        return "change-password";
+    }
+
+    @PostMapping("/user_info/change_password")
+    public String changePassword(@ModelAttribute("dto") UserDto userDto, @RequestParam(name = "newPass") String password) {
+        userDto.setUser_Password(password);
         userDto.setUser_Lastupdate(Timestamp.valueOf(LocalDateTime.now()));
         userDto.setBase64Image(Base64.getEncoder().encodeToString(userDto.getImage()));
         userService.updateUser(userDto);
 
-        return "user_info";
+        return "redirect:/home/user_info";
     }
 
 }

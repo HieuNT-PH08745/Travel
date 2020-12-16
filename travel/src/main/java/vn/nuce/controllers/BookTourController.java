@@ -121,7 +121,6 @@ public class BookTourController {
                 }
                 if (uId == -1) {
                     UserDto userDto1 = new UserDto();
-//                    userDto1.setUser_Id((long) (userDtos.size() + 1));
                     userDto1.setUser_Name(bookTourDto.getPhone());
                     String s;
                     do {
@@ -145,6 +144,7 @@ public class BookTourController {
                     userDto1.setUser_Createdate(Timestamp.valueOf(now.atStartOfDay()));
                     userDto1.setUser_Lastupdate(Timestamp.valueOf(LocalDateTime.now()));
                     userDto1.setUser_Gender(null);
+                    userDto1.setUser_Status((long) 1);
                     File file = new File("E:/duantotnghiep/travel/src/main/webapp/resources/home/images/avatar.png");
                     byte[] picByte = new byte[(int) file.length()];
                     try {

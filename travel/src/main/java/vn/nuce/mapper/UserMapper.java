@@ -19,6 +19,7 @@ public class UserMapper {
         userDto.setImage(userEntity.getImage());
         userDto.setUser_Createdate(userEntity.getUser_Createdate());
         userDto.setUser_Role(userEntity.getUser_Role());
+        userDto.setUser_Status(userEntity.getUser_Status());
 
         return userDto;
     }
@@ -37,6 +38,7 @@ public class UserMapper {
         userEntity.setImage(userDto.getImage());
         userEntity.setUser_Createdate(userDto.getUser_Createdate());
         userEntity.setUser_Role(userDto.getUser_Role());
+        userEntity.setUser_Status(userDto.getUser_Status());
 
         return userEntity;
     }

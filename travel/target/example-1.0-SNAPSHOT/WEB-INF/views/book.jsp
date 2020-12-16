@@ -813,7 +813,7 @@
                         <td>
                             <input type="text" id="nguoilon-value"
                                    style="border: none; width: 75%; background-color: white; text-align: right" readonly
-                                   value="${tour.tour_Price}">vnđ
+                                   value="${tour.tour_Price}">
                         </td>
                     </tr>
                     <tr>
@@ -823,9 +823,18 @@
                         <td>
                             <input type="text" id="treem-value"
                                    style="border: none; width: 75%; background-color: white; text-align: right" readonly
-                                   value="0">vnđ
+                                   value="0">
                         </td>
                     </tr>
+<%--                    <tr>--%>
+<%--                        <td>Trẻ sơ sinh</td>--%>
+<%--                        <td><input class="numbers" type="number" name="numBaby"--%>
+<%--                                   value="0"/></td>--%>
+<%--                        <td>--%>
+<%--                            <input type="text" style="border: none; width: 75%; background-color: white; text-align: right" readonly--%>
+<%--                                   value="0">--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
                     <tr>
                         <td colspan="2">
                             <p>Tổng tiền:</p>
@@ -833,7 +842,7 @@
                         <td>
                             <input type="text" id="tongtien" name="price"
                                    style="border: none; width: 75%; background-color: white; text-align: right"
-                                   readonly="true" value="${tour.tour_Price}"/>vnđ
+                                   readonly="true" value="${tour.tour_Price}"/>
                         </td>
                     </tr>
                 </table>
@@ -889,14 +898,17 @@
                             <div id="payCK" style="display: block">
                                 <p style="color: black; margin: 10px">THÔNG TIN THANH TOÁN CHUYỂN KHOẢN</p>
 
-                                <p style="color: black; margin: 10px"> - Ngân hàng TMCP Ngoại Thương Việt Nam - CN TP.HCM (VCB)</p>
+                                <p style="color: black; margin: 10px"> - Ngân hàng TMCP Ngoại Thương Việt Nam - CN TP.HN
+                                    (VCB)</p>
 
-                                <p style="color: black; margin: 10px"> - Tên đơn vị hưởng: CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH BẾN THÀNH</p>
+                                <p style="color: black; margin: 10px"> - Tên đơn vị hưởng: CÔNG TY CỔ PHẦN DỊCH VỤ DU
+                                    LỊCH POLYTRAVEL</p>
 
                                 <p style="color: black; margin: 10px"> - Số tài khoản VNĐ: 007.‎‎1001204617</p>
 
-                                <p style="color: black; margin: 10px"> - Tại Ngân Hàng VCB - CN TP.HCM</p>
-                            </div><br/>
+                                <p style="color: black; margin: 10px"> - Tại Ngân Hàng VCB - CN TP.HN</p>
+                            </div>
+                            <br/>
                             <input type="radio" id="female" name="gender" value="female" onclick="clickTM()">
                             <label for="female">Thanh toán tại văn phòng</label><br>
                             <div id="payTM" style="display: none">
@@ -904,7 +916,8 @@
 
                                 <p style="color: black; margin: 10px">(BENTHANH TOURIST)</p>
 
-                                <p style="color: black; margin: 10px">Trụ sở: 82-84 Calmette, P.Nguyễn Thái Bình, Quận 1, Tp.Hồ Chí Minh</p>
+                                <p style="color: black; margin: 10px">Trụ sở: 82-84 Calmette, P.Nguyễn Thái Bình, Quận
+                                    1, Tp.Hồ Chí Minh</p>
 
                                 <p style="color: black; margin: 10px">Điện thoại: 028.38227788</p>
 
@@ -913,7 +926,8 @@
                                 <p style="color: black; margin: 10px">Fax: 028.3829 5060</p>
 
                                 <p style="color: black; margin: 10px">Email: benthanh@benthanhtourist.com</p>
-                            </div><br/>
+                            </div>
+                            <br/>
                             <form:input type="hidden" id="bookTourPayment" path="payment" value="0"/>
                         </td>
                     </tr>

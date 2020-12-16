@@ -20,9 +20,9 @@ public class UserEntity implements Serializable {
     private String user_Fullname;
     @Column(name = "user_Gender")
     private Long user_Gender;
-    @Column(name = "user_Phone")
+    @Column(name = "user_Phone", unique = true)
     private String user_Phone;
-    @Column(name = "user_Email")
+    @Column(name = "user_Email", unique = true)
     private String user_Email;
     @Column(name = "user_Createdate")
     private Timestamp user_Createdate;
