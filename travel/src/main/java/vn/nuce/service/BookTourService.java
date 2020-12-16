@@ -14,4 +14,6 @@ public interface BookTourService {
     void save(BookTourDto bookTourDto);
 
     void remove(List<Long> ids);
+
+    TourDto findTour(Long bookId);
 }

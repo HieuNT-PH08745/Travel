@@ -28,7 +28,7 @@ public class BookTourDto {
 
     @Phone(message = "Không đúng định dạng số điện thoại")
     private String phone;
-    private String note;
+    private String notes;
     private Long tourId;
     private Long userId;
     private Timestamp createDate;
@@ -41,4 +41,5 @@ public class BookTourDto {
     private String tourName;
     private String createDateFormat;
     private int payment;
+    private String priceFormat;
 }

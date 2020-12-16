@@ -55,4 +55,17 @@ public class BookTourServiceImpl implements BookTourService {
         bookTourRepository.delete(ids);
     }
 
+    @Override
+    public TourDto findTour(Long bookId) {
+        List<TourDto> tourDtos = tourService.findAllTours();
+        BookTourEntity bookTourEntity = bookTourRepository.findOne(bookId);
+        TourDto tourDto = new TourDto();
+        for (TourDto tourDto1 : tourDtos) {
+            if (bookTourEntity.getTourId() == tourDto1.getTour_Id()) {
+                tourDto = tourDto1;
+            }
+        }
+        return tourDto;
+    }
+
 }

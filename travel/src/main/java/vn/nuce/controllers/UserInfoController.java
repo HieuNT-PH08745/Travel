@@ -18,6 +18,7 @@ import javax.validation.Valid;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -43,9 +44,23 @@ public class UserInfoController {
             UserDto dto = userService.findOneUser(dto1.getUser_Id());
             dto.setBase64Image(Base64.getEncoder().encodeToString(dto.getImage()));
             List<BookTourDto> bookTourDtos = userService.findBookTourByUserId(dto.getUser_Id());
-            List<BookTourDto> bookTourDtos1 = userService.findBookTourWaitByUserId(dto.getUser_Id());
-            modelMap.addAttribute("listBookTourWait", bookTourDtos1);
-            modelMap.addAttribute("listBookTour", bookTourDtos);
+            List<BookTourDto> bookTourDtosWait = userService.findBookTourWaitByUserId(dto.getUser_Id());
+            List<BookTourDto> bookTourDtos1 = new ArrayList<>();
+            List<BookTourDto> bookTourDtosWait1 = new ArrayList<>();
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumIntegerDigits(12);
+            for (BookTourDto bookTourDto : bookTourDtos) {
+                bookTourDto.setTourName(bookTourService.findTour(bookTourDto.getRegistration_Id()).getTour_Name());
+                bookTourDto.setPriceFormat(df.format(bookTourDto.getPrice()));
+                bookTourDtos1.add(bookTourDto);
+            }
+            for (BookTourDto bookTourDto : bookTourDtosWait) {
+                bookTourDto.setTourName(bookTourService.findTour(bookTourDto.getRegistration_Id()).getTour_Name());
+                bookTourDto.setPriceFormat(df.format(bookTourDto.getPrice()));
+                bookTourDtosWait1.add(bookTourDto);
+            }
+            modelMap.addAttribute("listBookTourWait", bookTourDtosWait1);
+            modelMap.addAttribute("listBookTour", bookTourDtos1);
             modelMap.addAttribute("dto", dto);
         }
         return "user_info";
@@ -119,6 +134,18 @@ public class UserInfoController {
         userService.updateUser(userDto);
 
         return "redirect:/home/user_info";
+    }
+
+    @GetMapping("/user_info/book/{id}")
+    @ResponseBody
+    public BookTourDto getBookTour(@PathVariable("id") Long id) {
+        BookTourDto bookTourDto = bookTourService.findById(id);
+        bookTourDto.setTourName(bookTourService.findTour(id).getTour_Name());
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumIntegerDigits(12);
+        bookTourDto.setPriceFormat(df.format(bookTourDto.getPrice()));
+        System.out.println(bookTourDto.getPriceFormat());
+        return bookTourDto;
     }
 
 }

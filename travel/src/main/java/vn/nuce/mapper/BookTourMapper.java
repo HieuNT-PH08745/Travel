@@ -17,14 +17,14 @@ public class BookTourMapper {
         bookTourDto.setPhone(bookTourEntity.getPhone());
         bookTourDto.setEmail(bookTourEntity.getEmail());
         bookTourDto.setPrice(bookTourEntity.getPrice());
-        bookTourDto.setNote(bookTourEntity.getNote());
+        bookTourDto.setNotes(bookTourEntity.getNote());
         bookTourDto.setNumChild(bookTourEntity.getNumChild());
         bookTourDto.setNumAdult(bookTourEntity.getNumAdult());
         bookTourDto.setStatus(bookTourEntity.getStatus());
         bookTourDto.setCreateDate(bookTourEntity.getCreateDate());
         bookTourDto.setDateConfirm(bookTourEntity.getDateConfirm());
         bookTourDto.setPayStatus(bookTourEntity.getPayStatus());
-        bookTourDto.setTourName(bookTourEntity.getTourName());
+//        bookTourDto.setTourName(bookTourEntity.getTourName());
         bookTourDto.setPayment(bookTourEntity.getPayment());
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         bookTourDto.setCreateDateFormat(bookTourEntity.getCreateDate().toLocalDateTime().toLocalDate().format(formatters));
@@ -42,14 +42,14 @@ public class BookTourMapper {
         bookTourEntity.setPhone(bookTourDto.getPhone());
         bookTourEntity.setEmail(bookTourDto.getEmail());
         bookTourEntity.setPrice(bookTourDto.getPrice());
-        bookTourEntity.setNote(bookTourDto.getNote());
+        bookTourEntity.setNote(bookTourDto.getNotes());
         bookTourEntity.setNumChild(bookTourDto.getNumChild());
         bookTourEntity.setNumAdult(bookTourDto.getNumAdult());
         bookTourEntity.setStatus(bookTourDto.getStatus());
         bookTourEntity.setCreateDate(bookTourDto.getCreateDate());
         bookTourEntity.setDateConfirm(bookTourDto.getDateConfirm());
         bookTourEntity.setPayStatus(bookTourDto.getPayStatus());
-        bookTourEntity.setTourName(bookTourDto.getTourName());
+//        bookTourEntity.setTourName(bookTourDto.getTourName());
         bookTourEntity.setPayment(bookTourDto.getPayment());
 
         return bookTourEntity;

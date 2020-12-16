@@ -887,7 +887,7 @@
                     <tr>
                         <td colspan="2">
                             <label>Ghi chú:</label>
-                            <form:textarea class="forms" path="note" rows="10"/><br/>
+                            <form:textarea class="forms" path="notes" rows="10"/><br/>
                         </td>
                     </tr>
                     <tr>

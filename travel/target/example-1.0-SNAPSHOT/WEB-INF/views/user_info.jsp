@@ -728,30 +728,27 @@
                                 <thead>
                                 <tr>
                                     <th>Tên tour</th>
-<%--                                    <th>Giá</th>--%>
                                     <th>Ngày đăng ký</th>
                                     <th>Trạng thái</th>
-<%--                                    <th></th>--%>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${listBookTour}">
                                     <tr>
                                         <td><p style="color: black">${list.tourName}</p></td>
-<%--                                        <td>--%>
-<%--                                            <p id="bookTourPriceF" style="color: black"></p>--%>
-<%--                                            <input type="hidden" value="${list.price}" id="bookTourPrice">--%>
-<%--                                        </td>--%>
                                         <td><p style="color: black">${list.createDateFormat}</p></td>
                                         <td>
                                             <p id="payStatusF" style="color: black"></p>
                                             <input type="hidden" value="${list.payStatus}" id="payStatus">
                                         </td>
-<%--                                        <td>--%>
-<%--                                            <button class="btn btn-lg btn-success">--%>
-<%--                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết--%>
-<%--                                            </button>--%>
-<%--                                        </td>--%>
+                                        <td>
+                                            <button class="btn btn-lg btn-success" type="button"
+                                                    data-target="#exampleModalCenter" data-toggle="modal"
+                                                    onclick="showBookTour(${list.registration_Id})">
+                                                <i class="glyphicon glyphicon-info-sign"></i> Chi tiết
+                                            </button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -760,41 +757,39 @@
                         </form>
                     </div>
                     <div class="tab-pane" id="listwait">
-                            <br/><br/>
-                            <table id="bookTour1">
-                                <thead>
+                        <br/><br/>
+                        <table id="bookTour1">
+                            <thead>
+                            <tr>
+                                <th>Tên tour</th>
+                                <th>Ngày đăng ký</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="listW" items="${listBookTourWait}">
                                 <tr>
-                                    <th>Tên tour</th>
-                                    <th>Giá</th>
-                                    <th>Ngày đăng ký</th>
-                                    <th></th>
-                                    <th></th>
+                                    <td><p style="color: black">${listW.tourName}</p></td>
+                                    <td><p style="color: black">${listW.createDateFormat}</p></td>
+                                    <td>
+                                        <button class="btn btn-lg btn-success" type="button"
+                                                data-target="#exampleModalCenter" data-toggle="modal"
+                                                onclick="showBookTour(${listW.registration_Id})">
+                                            <i class="glyphicon glyphicon-info-sign"></i> Chi tiết
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-lg btn-danger"
+                                                onclick="handleDelete(${listW.registration_Id})">
+                                            <i class="glyphicon glyphicon-remove"></i> Hủy đặt
+                                        </button>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="list" items="${listBookTourWait}">
-                                    <tr>
-                                        <td><p style="color: black">${list.tourName}</p></td>
-                                        <td>
-                                            <p id="bookTourPriceWF" style="color: black"></p>
-                                            <input type="hidden" value="${list.price}" id="bookTourPriceW">
-                                        </td>
-                                        <td><p style="color: black">${list.createDateFormat}</p></td>
-                                        <td>
-                                            <button class="btn btn-lg btn-success">
-                                                <i class="glyphicon glyphicon-info-sign"></i>Chi tiết
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-lg btn-danger" onclick="handleDelete(${list.registration_Id})">
-                                                <i class="glyphicon glyphicon-remove"></i>Hủy đặt
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                 </div>
             </div>
@@ -973,16 +968,97 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #fa9e1b">
+                <h5 class="modal-title" id="exampleModalLongTitle"
+                    style="margin-top: 10px; color: white; font-weight: bold; font-size: large">Thông tin đặt tour</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: navajowhite">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="body">
+                            <form>
+                                <center><textarea rows="3" cols="10"
+                                                  style="border: none; background-color: white; width: 100%; text-align: center; font-weight: bold; font-size: large"
+                                                  id="book_tourName" name="book_tourName" disabled="true"></textarea>
+                                </center><br/>
+                                <table border="0">
+                                    <tr>
+                                        <td colspan="2">
+                                            <label>Tên người đặt:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_name" name="book_name"
+                                                disabled="true"></input><br/><br/><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Số điện thoại:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_phone" name="book_phone" disabled="true"></input><br/><br/><br/>
+                                        </td>
+                                        <td>
+                                            <label>Email:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_email" name="book_email" disabled="true"></input><br/><br/><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Số người lớn đăng ký:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_numAdult" name="book_numAdult"
+                                                disabled="true"></input><br/><br/><br/>
+                                        </td>
+                                        <td>
+                                            <label>Số trẻ em đăng ký:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_numChild" name="book_numChild"
+                                                disabled="true"></input><br/><br/><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label>Ghi chú:</label> <textarea
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                id="book_notes" name="book_notes" disabled="true"></textarea><br/><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label>Tổng tiền:</label> <input
+                                                style="border: none; background-color: white; width: 100%; margin-left: 10px"
+                                                type="text" id="book_price" name="book_price" disabled="true"></input><br/><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Thông tin tour</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
 <script src="<c:url value="/resources/home/js/jquery-3.2.1.min.js"/>"></script>
 <script src="<c:url value="/resources/home/styles/bootstrap4/popper.js"/>"></script>
 <script src="<c:url value="/resources/home/styles/bootstrap4/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/home/plugins/OwlCarousel2-2.2.1/owl.carousel.js"/>"></script>
 <script src="<c:url value="/resources/home/plugins/easing/easing.js"/>"></script>
 <script src="<c:url value="/resources/home/js/custom.js"/>"></script>
-<%--<script src="<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-
 
 
 </body>
@@ -1033,14 +1109,6 @@
         if (pay == 1) {
             payF.innerHTML = "Đã thanh toán";
         }
-
-        var price = document.getElementById("bookTourPrice").value;
-        var priceF = price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        document.getElementById("bookTourPriceF").innerHTML = priceF + " vnđ";
-
-        var price = document.getElementById("bookTourPriceW").value;
-        var priceF = price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        document.getElementById("bookTourPriceWF").innerHTML = priceF + " vnđ";
     }
 
     function handleDelete(id) {
@@ -1070,5 +1138,42 @@
                 )
             }
         });
+    }
+
+    function showBookTour(bookId) {
+        let book_tourName = $('#book_tourName');
+        let book_name = $('#book_name');
+        let book_phone = $('#book_phone');
+        let book_email = $('#book_email');
+        let book_numAdult = $('#book_numAdult');
+        let book_numChild = $('#book_numChild');
+        let book_note = $('#book_notes');
+        let book_price = $('#book_price');
+        $.ajax({
+            url: '/home/user_info/book/' + bookId,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: '',
+            success: function (data) {
+                setDataForInputText(book_tourName, data.tourName);
+                setDataForInputText(book_name, data.name);
+                setDataForInputText(book_phone, data.phone);
+                setDataForInputText(book_email, data.email);
+                setDataForInputText(book_numAdult, data.numAdult);
+                setDataForInputText(book_numChild, data.numChild);
+                setDataForInputText(book_note, data.notes);
+                setDataForInputText(book_price, (data.priceFormat).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " vnđ");
+                $('#exampleModalCenter').modal('toggle');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+
+    function setDataForInputText(field, data) {
+        field.closest('div').addClass('focused');
+        field.val(data);
     }
 </script>

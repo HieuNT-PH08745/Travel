@@ -106,7 +106,7 @@ public class BookTourController {
             bookTourDto.setNumAdult(Integer.parseInt(numAdult));
             bookTourDto.setNumChild(Integer.parseInt(numChild));
             bookTourDto.setPrice(Double.parseDouble(price));
-            bookTourDto.setTourName(tourDto.getTour_Name());
+//            bookTourDto.setTourName(tourDto.getTour_Name());
             UserDto userDto = (UserDto) httpSession.getAttribute("user");
             if (userDto != null) {
                 Long userID = userDto.getUser_Id();
